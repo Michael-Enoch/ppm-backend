@@ -66,6 +66,14 @@ All seeded users use password: `AdminPass123!`
 docker compose up -d postgres redis zookeeper kafka minio
 ```
 
+2. Run the clean launcher before starting the app:
+
+```powershell
+.\scripts\run-clean.ps1
+```
+
+The script stops whichever PID is holding `8080`, double-checks the port, and launches `mvn spring-boot:run` in the background while streaming its stdout/stderr to `mvn-run.log` / `mvn-run.err`. Tail those logs with `Get-Content .\mvn-run.log -Wait` and switch to `.\scripts\run-clean.ps1 -MavenCommand .\mvnw` if you prefer the wrapper.
+
 2. Run the app:
 
 ```bash

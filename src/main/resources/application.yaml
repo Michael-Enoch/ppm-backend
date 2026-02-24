@@ -112,7 +112,7 @@ app:
   storage:
     endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
     access-key: ${MINIO_ACCESS_KEY:minioadmin}
-    secret-key: ${MINIO_SECRET_KEY:minioadmin}
+    secret-key: ${MINIO_SECRET_KEY:admin}
     bucket: ${MINIO_BUCKET:ppm-reports}
     presigned-url-minutes: 60
   cors:
