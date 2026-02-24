@@ -18,6 +18,7 @@ Spring Boot backend for secure project management, task orchestration, KPI inges
 ## Key Features
 
 - Auth endpoints: login, refresh token rotation, logout/revoke
+- Auth profile endpoint: `GET /api/auth/me`
 - RBAC roles: `ADMIN`, `ORG_MANAGER`, `PM`, `MEMBER`, `VIEWER`
 - CRUD APIs for users, roles, organizations, projects, tasks, KPIs, readings
 - Dashboard API: `GET /api/dashboard` with cached aggregates
@@ -44,6 +45,7 @@ All seeded users use password: `AdminPass123!`
 
 - `POST /api/auth/login`
 - `POST /api/auth/refresh`
+- `GET /api/auth/me`
 - `GET /api/projects`
 - `POST /api/projects`
 - `GET /api/projects/{id}`
@@ -80,6 +82,15 @@ docker compose up --build
 
 - Swagger UI: `http://localhost:8080/swagger-ui.html`
 - OpenAPI JSON: `http://localhost:8080/v3/api-docs`
+
+## CORS
+
+Allowed frontend origins are configurable:
+
+- `CORS_ORIGIN_1` (default `http://localhost:3000`)
+- `CORS_ORIGIN_2` (default `http://127.0.0.1:3000`)
+- `CORS_ORIGIN_3` (default `http://localhost:5173`)
+- `CORS_ORIGIN_4` (default `http://127.0.0.1:5173`)
 
 ## Postman
 

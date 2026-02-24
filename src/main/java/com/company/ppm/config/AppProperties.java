@@ -2,6 +2,8 @@ package com.company.ppm.config;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,6 +19,7 @@ public class AppProperties {
     private final IngestionProperties ingestion = new IngestionProperties();
     private final KafkaProperties kafka = new KafkaProperties();
     private final StorageProperties storage = new StorageProperties();
+    private final CorsProperties cors = new CorsProperties();
 
     @Getter
     @Setter
@@ -83,5 +86,18 @@ public class AppProperties {
 
         @Min(1)
         private int presignedUrlMinutes = 60;
+    }
+
+    @Getter
+    @Setter
+    public static class CorsProperties {
+        private List<String> allowedOrigins = new ArrayList<>(
+                List.of(
+                        "http://localhost:3000",
+                        "http://127.0.0.1:3000",
+                        "http://localhost:5173",
+                        "http://127.0.0.1:5173"
+                )
+        );
     }
 }
