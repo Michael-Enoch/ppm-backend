@@ -60,11 +60,13 @@ All seeded users use password: `AdminPass123!`
 
 ## Local Run
 
-1. Start infrastructure:
+1. Start infrastructure (skip `postgres` if you provide your own database):
 
 ```bash
-docker compose up -d postgres redis zookeeper kafka minio
+docker compose up -d redis zookeeper kafka minio
 ```
+
+If you still rely on the containerized Postgres, run `docker compose up -d postgres redis zookeeper kafka minio` instead, otherwise configure `DB_URL`, `DB_USER`, and `DB_PASS` to point at your external database before starting the app.
 
 2. Run the clean launcher before starting the app:
 
@@ -74,7 +76,7 @@ docker compose up -d postgres redis zookeeper kafka minio
 
 The script stops whichever PID is holding `8080`, double-checks the port, and launches `mvn spring-boot:run` in the background while streaming its stdout/stderr to `mvn-run.log` / `mvn-run.err`. Tail those logs with `Get-Content .\mvn-run.log -Wait` and switch to `.\scripts\run-clean.ps1 -MavenCommand .\mvnw` if you prefer the wrapper.
 
-2. Run the app:
+3. Run the app:
 
 ```bash
 mvn spring-boot:run
