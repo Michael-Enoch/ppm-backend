@@ -86,7 +86,7 @@ app:
   security:
     jwt:
       issuer: ppm-backend
-      secret: ${JWT_SECRET:change-me-change-me-change-me-change-me-change-me}
+      secret: ${JWT_SECRET:c5c968b33751b4d5b672f33056508106}
       access-token-minutes: 30
       refresh-token-days: 14
   ingestion:
@@ -104,7 +104,4 @@ app:
     presigned-url-minutes: 60
   cors:
     allowed-origins:
-      - ${CORS_ORIGIN_1:http://localhost:3000}
-      - ${CORS_ORIGIN_2:http://127.0.0.1:3000}
-      - ${CORS_ORIGIN_3:http://localhost:5173}
-      - ${CORS_ORIGIN_4:http://127.0.0.1:5173}
+      - ${CORS_ALLOWED_ORIGIN:http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173}
