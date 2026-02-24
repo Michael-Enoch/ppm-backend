@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   app:
     build: .
@@ -8,8 +6,8 @@ services:
       - "8080:8080"
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/ppm
-      DB_USER: ppm
-      DB_PASS: ppm
+      DB_USER: postgres
+      DB_PASS: michael
       REDIS_HOST: redis
       REDIS_PORT: 6379
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
@@ -17,7 +15,7 @@ services:
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
       MINIO_BUCKET: ppm-reports
-      JWT_SECRET: change-me-change-me-change-me-change-me-change-me
+      JWT_SECRET: c5c968b33751b4d5b672f33056508106
     depends_on:
       - postgres
       - redis
@@ -29,8 +27,8 @@ services:
     container_name: ppm-postgres
     environment:
       POSTGRES_DB: ppm
-      POSTGRES_USER: ppm
-      POSTGRES_PASSWORD: ppm
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: michael
     ports:
       - "5432:5432"
     volumes:
