@@ -92,6 +92,17 @@ Allowed frontend origins are configurable:
 - `CORS_ORIGIN_3` (default `http://localhost:5173`)
 - `CORS_ORIGIN_4` (default `http://127.0.0.1:5173`)
 
+## Render Deploy Notes
+
+For Render Web Services, set these environment variables:
+
+- `SPRING_DATASOURCE_URL` or `JDBC_DATABASE_URL` (must be JDBC format, e.g. `jdbc:postgresql://...`)
+- `SPRING_DATASOURCE_USERNAME` / `SPRING_DATASOURCE_PASSWORD` (or `DB_USER` / `DB_PASS`)
+- `DB_SSL_MODE=require` when your Render Postgres requires SSL
+- `PORT` is auto-provided by Render and already wired in config
+
+If you use Render's non-JDBC `DATABASE_URL` value (starts with `postgres://`), convert it to JDBC format (`jdbc:postgresql://...`) before setting it.
+
 ## Postman
 
 Import: `postman/Enterprise-PPM-Suite.postman_collection.json`

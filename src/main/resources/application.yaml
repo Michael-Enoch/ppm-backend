@@ -2,9 +2,17 @@ spring:
   application:
     name: ppm-backend
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/ppm}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASS:michael}
+    url: ${SPRING_DATASOURCE_URL:${JDBC_DATABASE_URL:${DB_URL:jdbc:postgresql://localhost:5432/ppm}}}
+    username: ${SPRING_DATASOURCE_USERNAME:${JDBC_DATABASE_USERNAME:${DB_USER:postgres}}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${JDBC_DATABASE_PASSWORD:${DB_PASS:michael}}}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX_SIZE:10}
+      minimum-idle: ${DB_POOL_MIN_IDLE:2}
+      connection-timeout: ${DB_CONNECTION_TIMEOUT_MS:30000}
+      validation-timeout: ${DB_VALIDATION_TIMEOUT_MS:5000}
+      data-source-properties:
+        sslmode: ${DB_SSL_MODE:disable}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -20,7 +28,12 @@ spring:
     redis:
       time-to-live: 30s
   data:
+    jdbc:
+      repositories:
+        enabled: false
     redis:
+      repositories:
+        enabled: false
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
   jackson:
