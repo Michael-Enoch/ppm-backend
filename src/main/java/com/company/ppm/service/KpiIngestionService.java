@@ -20,13 +20,13 @@ public class KpiIngestionService {
 
     private final KpiService kpiService;
     private final KpiReadingRepository kpiReadingRepository;
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaTemplate<String, KpiReadingEvent> kafkaTemplate; // <-- updated type
     private final AppProperties appProperties;
 
     public KpiIngestionService(
             KpiService kpiService,
             KpiReadingRepository kpiReadingRepository,
-            KafkaTemplate<String, Object> kafkaTemplate,
+            KafkaTemplate<String, KpiReadingEvent> kafkaTemplate, // <-- updated type
             AppProperties appProperties
     ) {
         this.kpiService = kpiService;
