@@ -33,3 +33,6 @@ build/
 .vscode/
 mvn-run.log
 mvn-run.err
+
+
+.env
