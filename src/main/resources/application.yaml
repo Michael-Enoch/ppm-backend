@@ -34,22 +34,22 @@ spring:
     redis:
       repositories:
         enabled: false
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+      ssl:
+          enabled: true
   jackson:
     serialization:
       write-dates-as-timestamps: false
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    logging:
+      level:
+        org.apache.kafka: ERROR
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        spring:
-          json:
-            add:
-              type:
-                headers: false
     consumer:
       group-id: ppm-backend
       auto-offset-reset: earliest
@@ -57,20 +57,8 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     streams:
       application-id: ppm-kpi-aggregator
-      properties:
-        default:
-          key:
-            serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-        spring:
-          json:
-            trusted:
-              packages: "*"
-        commit:
-          interval:
-            ms: 1000
-
 server:
-  port: ${PORT:8080}
+  port: 8080
 
 management:
   endpoints:
@@ -103,7 +91,7 @@ app:
   security:
     jwt:
       issuer: ppm-backend
-      secret: ${JWT_SECRET:c5c968b33751b4d5b672f33056508106}
+      secret: ${JWT_SECRET}
       access-token-minutes: 30
       refresh-token-days: 14
   ingestion:
@@ -114,10 +102,10 @@ app:
       kpi-readings: ppm.kpi.readings
       kpi-aggregates: ppm.kpi.aggregates
   storage:
-    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
-    access-key: ${MINIO_ACCESS_KEY:minioadmin}
-    secret-key: ${MINIO_SECRET_KEY:admin}
-    bucket: ${MINIO_BUCKET:ppm-reports}
+    endpoint: ${MINIO_ENDPOINT}
+    access-key: ${MINIO_ROOT_USER}
+    secret-key: ${MINIO_ROOT_PASSWORD}
+    bucket: ${MINIO_BUCKET}
     presigned-url-minutes: 60
   cors:
     allowed-origins:
